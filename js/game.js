@@ -118,8 +118,8 @@ function handleOrientation(e) {
     var x = e.gamma; // range [-90,90]
     var y = e.beta; // range [-180,180]
     if (Math.abs(ball.body.velocity.x) < 800) {
-        ball.body.velocity.x += x * 4;
-        ball.body.velocity.y += y * 4;
+        ball.body.velocity.x += x * 10;
+        ball.body.velocity.y += y * 10;
     }
 
     if (Math.abs(x) > 10 || Math.abs(y) > 10) {
