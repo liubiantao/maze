@@ -37,7 +37,7 @@ function create() {
     layer = map.createLayer('Background');
 
     //  Un-comment this on to see the collision tiles
-    layer.debug = true;
+    // layer.debug = true;
 
     layer.resizeWorld();
 
@@ -117,9 +117,11 @@ function handleOrientation(e) {
     updateShadowTexture();
     var x = e.gamma; // range [-90,90]
     var y = e.beta; // range [-180,180]
+    if (Math.abs(ball.body.velocity.x) < 800) {
         ball.body.velocity.x += x * 4;
         ball.body.velocity.y += y * 4;
     }
+
     if (Math.abs(x) > 10 || Math.abs(y) > 10) {
         ball.animations.play('roll');
     } else {
@@ -137,6 +139,7 @@ function updateShadowTexture() {
     // underneath it darker, while the white area is unaffected.
 
     // Draw shadow
+    shadowTexture.context.fillStyle = '#0A1821';
     shadowTexture.context.fillRect(0, 0, game.world.width, game.world.height);
 
     // Draw circle of light with a soft edge
@@ -173,6 +176,7 @@ function finishGame() {
 function render() {
     if (showDebug) {
         game.debug.bodyInfo(ball, 32, 32);
+        game.debug.cameraInfo(game.camera, 32, game.world.height - 200);
 
     }
 }
