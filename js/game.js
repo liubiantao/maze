@@ -120,11 +120,11 @@ function handleOrientation(e) {
     var x = e.gamma; // range [-90,90]
     var y = e.beta; // range [-180,180]
     if (Math.abs(ball.body.velocity.x) < 500) {
-        ball.body.velocity.x += x * 4;
-        ball.body.velocity.y += y * 4;
+        ball.body.velocity.x += x * 3;
+        ball.body.velocity.y += y * 3;
     }
     // console.log(Math.abs(x) + "," + Math.abs(y));
-    if (ball.body.velocity.x > 5 || ball.body.velocity.y > 5) {
+    if (Math.abs(ball.body.velocity.x) > 5 || Math.abs(ball.body.velocity.y) > 5) {
         ball.animations.play('roll');
     } else {
         ball.animations.stop();
