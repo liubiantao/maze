@@ -86,25 +86,25 @@ function update() {
 
     updateShadowTexture();
 
-    var force = 200;
+    // var force = 200;
 
-    if (keys.left.isDown) {
-        ball.body.velocity.x = -force;
-        ball.animations.play('roll');
-    } else if (keys.right.isDown) {
-        ball.animations.play('roll');
-        ball.body.velocity.x = force;
-    } else if (keys.up.isDown) {
-        ball.animations.play('roll');
-        ball.body.velocity.y = -force;
-    } else if (keys.down.isDown) {
-        ball.animations.play('roll');
-        ball.body.velocity.y = force;
-    } else {
-        ball.animations.stop();
-        ball.body.velocity.x = 0;
-        ball.body.velocity.y = 0;
-    }
+    // if (keys.left.isDown) {
+    //     ball.body.velocity.x = -force;
+    //     ball.animations.play('roll');
+    // } else if (keys.right.isDown) {
+    //     ball.animations.play('roll');
+    //     ball.body.velocity.x = force;
+    // } else if (keys.up.isDown) {
+    //     ball.animations.play('roll');
+    //     ball.body.velocity.y = -force;
+    // } else if (keys.down.isDown) {
+    //     ball.animations.play('roll');
+    //     ball.body.velocity.y = force;
+    // } else {
+    //     ball.animations.stop();
+    //     ball.body.velocity.x = 0;
+    //     ball.body.velocity.y = 0;
+    // }
     // ball.body.acceleration.x = 10;
     // ball.body.acceleration.y = 10;
     // game.camera.focusOn(ball);
@@ -114,15 +114,17 @@ function update() {
 }
 
 function handleOrientation(e) {
+    game.physics.arcade.collide(ball, layer);
+    game.physics.arcade.overlap(ball, home, finishGame);
     updateShadowTexture();
     var x = e.gamma; // range [-90,90]
     var y = e.beta; // range [-180,180]
-    if (Math.abs(ball.body.velocity.x) < 800) {
+    if (Math.abs(ball.body.velocity.x) < 500) {
         ball.body.velocity.x += x * 10;
         ball.body.velocity.y += y * 10;
     }
-
-    if (Math.abs(x) > 10 || Math.abs(y) > 10) {
+    // console.log(Math.abs(x) + "," + Math.abs(y));
+    if (Math.abs(x) > 2 || Math.abs(y) > 2) {
         ball.animations.play('roll');
     } else {
         ball.animations.stop();
