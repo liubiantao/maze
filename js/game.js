@@ -28,12 +28,12 @@ function preload() {
 
 function create() {
     // game.stage.backgroundColor = "#555555";
-    game.world.setBounds(0, 0, 2000, 2000);
+    // game.world.setBounds(0, 0, 2000, 2000);
     // game.world.resize(1000, 1000);
     // game.add.sprite(0, 0, 'bg');
     map = game.add.tilemap('maze');
     map.addTilesetImage('maze-tileset', 'tiles');
-    // map.setCollision(27);
+    map.setCollision(33);
     layer = map.createLayer('Background');
 
     //  Un-comment this on to see the collision tiles
@@ -86,7 +86,7 @@ function update() {
 
     updateShadowTexture();
 
-    var force = 150;
+    var force = 200;
 
     if (keys.left.isDown) {
         ball.body.velocity.x = -force;
@@ -117,9 +117,9 @@ function handleOrientation(e) {
     updateShadowTexture();
     var x = e.gamma; // range [-90,90]
     var y = e.beta; // range [-180,180]
-    if (Math.abs(ball.body.velocity.x) < 250) {
-        ball.body.velocity.x = -x * 4;
-        ball.body.velocity.y = -y * 4;
+    if (Math.abs(ball.body.velocity.x) < 550) {
+        ball.body.velocity.x += x * 4;
+        ball.body.velocity.y += y * 4;
     }
     if (Math.abs(x) > 10 || Math.abs(y) > 10) {
         ball.animations.play('roll');
