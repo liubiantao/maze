@@ -48,9 +48,11 @@ function create() {
     game.physics.arcade.enable(ball);
     game.physics.arcade.enable(home);
 
-    ball.body.bounce.y = 0.1;
-    ball.body.gravity.y = 0;
+    ball.anchor.setTo(0.5, 0.5);
+    ball.body.bounce.setTo(0.2, 0.2);
+    // ball.body.gravity.y = 0;
     ball.body.collideWorldBounds = true;
+    ball.body.linearDamping = 1;
     ball.animations.add('roll', [0, 1, 2, 3], 10, true);
 
     keys = game.input.keyboard.createCursorKeys();
@@ -117,10 +119,10 @@ function handleOrientation(e) {
     updateShadowTexture();
     var x = e.gamma; // range [-90,90]
     var y = e.beta; // range [-180,180]
-    if (Math.abs(ball.body.velocity.x) < 550) {
-        ball.body.velocity.x += x * 4;
-        ball.body.velocity.y += y * 4;
-    }
+    // if (Math.abs(ball.body.velocity.x) < 550) {
+    ball.body.velocity.x += x * 2;
+    ball.body.velocity.y += y * 4;
+    // }
     if (Math.abs(x) > 10 || Math.abs(y) > 10) {
         ball.animations.play('roll');
     } else {
